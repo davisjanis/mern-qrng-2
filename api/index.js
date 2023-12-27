@@ -25,20 +25,19 @@ app.listen(3000, () => {
 }); 
 
 //MOUNT MIDDLEWARE FUNCTIONS (app.use is Express method to do that)
-// middleware funcs are functions that have avvess to the req or res object, and the next middleware func in the apps request-response cycle.
-
+// middleware funcs are functions that have access to the req or res object, and the next middleware func in the apps request-response cycle.
 
 app.use('/api/user', userRoutes);
 app.use("/api/auth", authRoutes);
 
 // error handling middleware
-app.use((err, req, res, next) => {
-    const statusCode = err.statusCode || 500;
-    const message = err.message || 'Internal Server Error';
-    return res.status(statusCode).json({
-        success: false,
-        message,
-        statusCode,
-    })
-}
+    app.use((err, req, res, next) => {
+        const statusCode = err.statusCode || 500;
+        const message = err.message || 'Internal Server Error';
+        return res.status(statusCode).json({
+            success: false,
+            message,
+            statusCode,
+        })
+    }
     )
