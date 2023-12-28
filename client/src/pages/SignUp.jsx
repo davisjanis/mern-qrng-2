@@ -5,8 +5,11 @@ import {Link} from 'react-router-dom';
 
 //SIGN UP FUNC
 export default function SignUp() {
+  //save form data state
   const [formData, setFormData] = useState({});
+  //error message state
   const [error, setError] = useState(false);
+  //loading UI state
   const [loading, setLoading] = useState(false);
   //INPUT FIELD VALUES
   const handleChange = (e) => {
@@ -44,7 +47,7 @@ export default function SignUp() {
     <div className="p-3 max-w-lg mx-auto">
       <h1 className='text-3xl text-center font-semibold
       my-7'>
-        SignUp
+        Sign Up
       </h1>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <input 
@@ -79,7 +82,7 @@ export default function SignUp() {
             disabled:opacity-80
             ">
               {loading ? 'Loading...' : 'Sign Up'}
-            </button>
+        </button>
       </form>
       <div className="flex gap-2 mt-5">
         <p>Have an account?</p>
