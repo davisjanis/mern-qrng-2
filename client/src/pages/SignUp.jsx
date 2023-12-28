@@ -1,7 +1,7 @@
 //FUNCTIONAL COMPONENT
 
 import { useState } from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 
 //SIGN UP FUNC
 export default function SignUp() {
@@ -11,7 +11,9 @@ export default function SignUp() {
   const [error, setError] = useState(false);
   //loading UI state
   const [loading, setLoading] = useState(false);
-  //INPUT FIELD VALUES
+  const navigate = useNavigate();
+
+  //TRACK INPUT FIELD VALUES
   const handleChange = (e) => {
     //updating the form data state with a new object.
     setFormData({...formData, [e.target.id]: e.target.value})
@@ -35,6 +37,7 @@ export default function SignUp() {
         setError(true);
         return;
       }
+      navigate('/sign-in');
     } catch (error) {
       setLoading(false);
       setError(true);

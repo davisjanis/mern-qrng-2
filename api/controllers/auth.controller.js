@@ -31,8 +31,9 @@ export const signin = async (req, res, next) => {
         //token is hashed value of unique things from the user(email, id, username, etc) we make this thing encrypted and put in insede the cookie, and later when we need to verify the user, we can use that token.
         //JWT TOKEN CREATION
         const token = jwt.sign({id: validUser._id}, process.env.JWT_SECRET);
-        //remove client password from sending
-        const {password: hashedPassword, ...rest} = validUser._doc;
+        //remove client password from server response
+       const {password: hashedPassword, ...rest} = validUser._doc;
+       // token expiration
         const expiryDate = new Date(Date.now() + 3600000);
         // SET JWT TOKEN IN A COOKIE in the HTTP response
         res
