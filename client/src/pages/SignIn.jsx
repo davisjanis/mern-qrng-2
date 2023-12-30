@@ -2,16 +2,20 @@
 
 import { useState } from 'react';
 import {Link, useNavigate} from 'react-router-dom';
+import { signInStart, signInSuccess, signInFailure } from '../redux/user/userSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 //SIGN UP FUNC
 export default function SignIn() {
   //save form data state
   const [formData, setFormData] = useState({});
-  //error message state
-  const [error, setError] = useState(false);
-  //loading UI state
-  const [loading, setLoading] = useState(false);
+  // //error message state
+  // const [error, setError] = useState(false);
+  // //loading UI state
+  // const [loading, setLoading] = useState(false);
+  const { loading, error } = useSelector((state) => state.user);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   //TRACK INPUT FIELD VALUES
   const handleChange = (e) => {
@@ -22,8 +26,9 @@ export default function SignIn() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      setLoading(true);
-      setError(false);
+      dispatch(signInStart());
+      // setLoading(true);
+      // setError(false);
       const res = await fetch('/api/auth/signin', {
         method: 'POST',
         headers: {
@@ -32,15 +37,18 @@ export default function SignIn() {
         body: JSON.stringify(formData),
       });
       const data = await res.json();
-      setLoading(false);
+      // setLoading(false);
       if (data.success === false) {
-        setError(true);
+        dispatch(signInFailure(data));
+       // setError(true);
         return;
       }
+      dispatch(signInSuccess(data));
       navigate('/')
     } catch (error) {
-      setLoading(false);
-      setError(true);
+      dispatch(signInFailure(error));
+      // setLoading(false);
+      // setError(true);
     }
   }
 
@@ -89,7 +97,9 @@ export default function SignIn() {
         </span>
         </Link>
       </div>
-      <p className='text-red-700 mt-5'>{error && 'Something went wrong!'}</p>
+      <p className='text-red-700 mt-5'>
+        {error ? error.message || 'Something went wrong!' : ''}
+      </p>
     </div>
   );
 }
