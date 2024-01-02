@@ -21,9 +21,15 @@ export default function Header() {
                 flex 
                 gap-4"
         >
+        <Link to="/home">
           <li>Home</li>
+        </Link>
+        <Link to="/about">
           <li>About</li>
+        </Link>
+        <Link to="sign-in">
           <li>Sign In</li>
+        </Link>
         </ul>
       </div>
     </div>
