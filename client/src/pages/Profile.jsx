@@ -57,13 +57,14 @@ const handleFileUpload = async (image) => {
           request.resource.size < 2 * 1024 * 1024 && 
           request.resource.contentType.matches('image/.*') */}
       <img 
-        src={currentUser.profilePicture} alt="profile"
-      className='
-        h-24 w-24
-       self-center cursor-pointer
-       rounded-full
-        object-cover mt-2' 
-        onClick={() => fileRef.current.click()}
+        src={formData.profilePicture || currentUser.profilePicture} 
+        alt="profile"
+        className='
+          h-24 w-24
+          self-center cursor-pointer
+          rounded-full
+          object-cover mt-2' 
+          onClick={() => fileRef.current.click()}
       />
       <p className='text-sm self-center'>
           {imageError ? ( 
