@@ -15,7 +15,7 @@ export const signup = async (req, res, next) => {
         res.status(201).json({message: "User Created successfully"});
     
     } catch (error) {
-        next(errorHandler(300, "smth went wrong"));
+        next(error);
     }    
 };
 
@@ -53,15 +53,23 @@ export const google = async (req, res, next) => {
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
         const {password: hashedPassword, ...rest } = user._doc;
         const expiryDate = new Date(Date.now() + 3600000); 
-        res.cookie('access_token', token, { httpOnly: true,
-        expires: expiryDate}).status(200).json(rest);
+        res
+          .cookie('access_token', token, { 
+            httpOnly: true,
+            expires: expiryDate
+          })
+          .status(200)
+          .json(rest);
       } else {
         const generatedPassword =
-         Math.random().toString(36).slice(-8) + Math.random().toString(36).slice(-8);
-         const hashedPassword = bcryptjs.hashSync
-         (generatedPassword, 10);
-         const newUser = new User({
-            username: req.body.name.split(" ").join("").toLowerCase() + (Math.floor(Math.random() * 10000)).toString(),
+          Math.random().toString(36).slice(-8) + 
+          Math.random().toString(36).slice(-8);
+        const hashedPassword = bcryptjs.hashSync(generatedPassword, 10);
+        const newUser = new User({
+            username: 
+              req.body.name.split(" ").join("").toLowerCase() + 
+              // (Math.floor(Math.random() * 10000)).toString(),
+              Math.random().toString(36).slice(-8),
             email: req.body.email,
             password: hashedPassword,
             profilePicture: req.body.photo 
@@ -70,12 +78,17 @@ export const google = async (req, res, next) => {
          const token = jwt.sign({ id: newUser._id}, process.env.JWT_SECRET);
          const { password: hashedPassword2, ...rest } = newUser._doc;
          const expiryDate = new Date(Date.now() + 3600000);
-         res.cookie('access_token', token, {
+         res
+            .cookie('access_token', token, {
             httpOnly: true,
             expires: expiryDate,
-         }).status(200).json(rest);
+          })
+            .status(200)
+            .json(rest);
       }
     } catch (error) {
       next(error);
     }
-  }
+  };
+
+  

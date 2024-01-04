@@ -11,13 +11,14 @@ const persistConfig = {
     key: 'root',
     version: 1, 
     storage,
-}
+};
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 export const store = configureStore({
     reducer: persistedReducer,
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+    middleware: (getDefaultMiddleware) =>
+     getDefaultMiddleware({
         // prevent error while using redux toolkit
         serializableCheck: false,
     }),

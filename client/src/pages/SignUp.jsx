@@ -19,6 +19,7 @@ export default function SignUp() {
     //updating the form data state with a new object.
     setFormData({...formData, [e.target.id]: e.target.value})
   }
+  
   //form's event listener function (SUBMIT BUTTON)
   const handleSubmit = async (e) => {
     e.preventDefault();
