@@ -16,7 +16,7 @@ export default function Header() {
             p-3"
       >
         <Link to="/">
-          <h1 className="font-bold">Auth App</h1>
+          <h1 className="font-bold">RQRNG</h1>
         </Link>
         <ul
           className="
