@@ -5,13 +5,14 @@ import jwt from 'jsonwebtoken';
 
 //sign up route function
 export const signup = async (req, res, next) => {
-    //destructure request body from POST method
+    //destructure request body from POST method, to create new user
     const {username, email, password} = req.body;
     // get password and hashit
     const hashedPassword = bcryptjs.hashSync(password, 10);
     
     const newUser = new User({username, email, password: hashedPassword});
     try {
+      // save to mongobodb
         await newUser.save()
         res.status(201).json({message: "User Created successfully"});
     
@@ -21,6 +22,7 @@ export const signup = async (req, res, next) => {
 };
 
 //sign in route function
+
 // we use (next) for middleware handling errors
 export const signin = async (req, res, next) => {
     const {email,password} = req.body;
