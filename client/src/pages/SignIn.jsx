@@ -45,7 +45,7 @@ export default function SignIn() {
         return;
       }
       dispatch(signInSuccess(data));
-      navigate('/')
+      navigate('/certs')
     } catch (error) {
       dispatch(signInFailure(error));
       // setLoading(false);
