@@ -9,7 +9,7 @@ export const signup = async (req, res, next) => {
     const {username, email, password} = req.body;
     // get password and hashit
     const hashedPassword = bcryptjs.hashSync(password, 10);
-    
+    //create a new instance of the User model from user.model.js
     const newUser = new User({username, email, password: hashedPassword});
     try {
       // save to mongobodb

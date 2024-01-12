@@ -1,4 +1,4 @@
-//FUNCTIONAL COMPONENT
+//stateful FUNCTIONAL COMPONENT
 
 import { useState } from 'react';
 import {Link, useNavigate} from 'react-router-dom';
@@ -19,8 +19,9 @@ export default function SignIn() {
   const dispatch = useDispatch();
 
   //TRACK INPUT FIELD VALUES
-  const handleChange = (e) => {
+  const handleChange = (e) =>  {
     //updating the form data state with a new object.
+    //e.target.value givees you the 'key' what is pressed. event(object) -> target(property) -> value(property)
     setFormData({...formData, [e.target.id]: e.target.value})
   }
   //form's event listener function (SUBMIT BUTTON)

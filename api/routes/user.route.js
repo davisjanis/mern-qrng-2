@@ -10,3 +10,4 @@ router.delete('/delete/:id', verifyToken, deleteUser)
 
 
 export default router;
+//will be imported in index.js as userRoutes

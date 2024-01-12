@@ -6,8 +6,11 @@ import authRoutes from './routes/auth.route.js'
 import cookieParser from 'cookie-parser';
 dotenv.config();
 
-mongoose.connect(process.env.MONGO).then(() => {
-    console.log('Connected to MongoDB');
+//connect the database
+mongoose
+    .connect(process.env.MONGO)
+    .then(() => {
+        console.log('Connected to MongoDB');
     })
     .catch((err) => {
         console.log(err);
@@ -26,9 +29,9 @@ app.listen(3000, () => {
     console.log('Server listening on port 3000!');
 }); 
 
-//MOUNT MIDDLEWARE FUNCTIONS (app.use is Express method to do that)
-// middleware funcs are functions that have access to the req or res object, and the next middleware func in the apps request-response cycle.
-
+//MOUNT MIDDLEWARE FUNCTIONS 
+// middleware funcs are functions with access to the req or res object, and the next middleware func in the apps request-response cycle.
+// userRoutes is imported from user.route.js as export default user
 app.use('/api/user', userRoutes);
 app.use("/api/auth", authRoutes);
 
