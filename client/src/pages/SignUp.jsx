@@ -14,7 +14,7 @@ export default function SignUp() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  //TRACK INPUT FIELD VALUES
+  //TRACK INPUT FIELD VALUES, and save into the state
   const handleChange = (e) => {
     //updating the form data state with a new object.
     setFormData({...formData, [e.target.id]: e.target.value})
@@ -26,6 +26,7 @@ export default function SignUp() {
     try {
       setLoading(true);
       setError(false);
+      //request to the db /fetch function call
       const res = await fetch('/api/auth/signup', {
         method: 'POST',
         headers: {

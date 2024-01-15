@@ -19,7 +19,7 @@ mongoose
     //start the app
 const app = express();
 
-//to receive json as input
+//to receive json as input (by default we can't send .json to app)
 app.use(express.json());
 
 app.use(cookieParser());
@@ -30,9 +30,11 @@ app.listen(3000, () => {
 }); 
 
 //MOUNT MIDDLEWARE FUNCTIONS 
+
 // middleware funcs are functions with access to the req or res object, and the next middleware func in the apps request-response cycle.
 // userRoutes is imported from user.route.js as export default user
 app.use('/api/user', userRoutes);
+//authRoutes is imported from auth.route.js as export default routes
 app.use("/api/auth", authRoutes);
 
 // error handling middleware

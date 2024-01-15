@@ -3,7 +3,7 @@ import bcryptjs from 'bcryptjs';
 import { errorHandler } from "../utils/error.js";
 import jwt from 'jsonwebtoken';
 
-//sign up route function
+//sign up route function for mongodb
 export const signup = async (req, res, next) => {
     //destructure request body from POST method, to create new user
     const {username, email, password} = req.body;
@@ -31,9 +31,10 @@ export const signin = async (req, res, next) => {
         if (!validUser) return next(errorHandler(404, 'User not found'));
         const validPassword = bcryptjs.compareSync(password, validUser.password);
         if (!validPassword) return next(errorHandler(401, 'wrong credentials'));
-        // when email n password are correct, we want to add token to the cookie of the browser
+        //1:59:05 when email n password are correct, we want to add token to the cookie of the browser
         //token is hashed value of unique things from the user(email, id, username, etc) we make this thing encrypted and put in insede the cookie, and later when we need to verify the user, we can use that token.
-        //JWT TOKEN CREATION
+        
+        //JWT TOKEN GENERATION with a payload that includes a user ID, retrieved from db, and then jwt is signed with a custom secret
         const token = jwt.sign({id: validUser._id}, process.env.JWT_SECRET);
         //remove client password from server response
        const {password: hashedPassword, ...rest} = validUser._doc;
@@ -41,7 +42,7 @@ export const signin = async (req, res, next) => {
         const expiryDate = new Date(Date.now() + 3600000);
         // SET JWT TOKEN IN A COOKIE in the HTTP response
         res
-            .cookie('access_token', token, {httpOnly: true, expires: expiryDate})
+            .cookie('access_token', token, {httpOnly: true, expires: expiryDate}) //httpOnly:true prevents from 3rd party apps modifying cookie
             .status(200)
             .json(rest);
     } catch (error) {
