@@ -1,4 +1,4 @@
-export const COLUMNS = [
+export const TABLE_COLUMNS = [
     {
         Header: 'id',
         accessor: 'id'

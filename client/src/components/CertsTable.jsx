@@ -1,16 +1,20 @@
 import React, {useMemo} from 'react';
 import { useTable } from 'react-table';
 import MOCK_DATA from './MOCK_DATA.json';
-import {COLUMNS} from './Columns';
+import {TABLE_COLUMNS} from './Columns';
 
-export default function BasicTable() {
+export default function CertsTable() {
 
-    const columns = useMemo(() => COLUMNS, [])
+    // Memoization caches the TABLE_COLUMNS array to improve performance
+    // by preventing unnecessary re-renders, and the empty dependency array [] indicates no dependencies.
+    const columns = useMemo(() => TABLE_COLUMNS, [])
     const data = useMemo(() => MOCK_DATA, [])
 
-
-
+// create tableInstance
+//use useTable hook and pass in an object as argument. 
+// define 2 properties on this object ( pass in columns and data(rows) as arguments inside useTable hook)
    const tableInstance = useTable({
+    //remember EC6 shorthand syntax: objProp columns: columns === columns
         columns,
         data
     });
