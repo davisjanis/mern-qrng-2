@@ -3,18 +3,28 @@ export const TABLE_COLUMNS = [
         Header: 'id',
         accessor: 'id'
     },
+    // {
+    //     Header: 'Serial Number',
+    //     accessor: 'SerialNumber' 
+    // },
+    // {
+    //     Header: 'Signature Algorithm ID',
+    //     accessor: 'SignatureAlgorithmID' 
+    // },
+    // {
+    //     Header: 'Issuer Name',
+    //     accessor: 'IssuerName' 
+    // },
     {
-        Header: 'username',
-        accessor: 'username'
+        Header: 'Validity Period',
+        accessor: 'ValidityPeriod' 
     },
+    // {
+    //     Header: 'Cert Signature Algorithm',
+    //     accessor: 'CertSignatureAlgorithm' 
+    // },
     {
-        Header: 'email',
-        accessor: 'email'
-
-    },
-    {
-        Header: 'creation_date',
-        accessor: 'creation_date'
-
+        Header: 'Cert Signature',
+        accessor: 'CertSignature'
     }
-]
+];

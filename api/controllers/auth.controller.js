@@ -13,12 +13,16 @@ export const signup = async (req, res, next) => {
     const newUser = new User({username, email, password: hashedPassword});
     try {
       // save to mongobodb
+
         await newUser.save()
         res.status(201).json({message: "User Created successfully"});
     
     } catch (error) {
         next(error);
-    }    
+    }   
+    
+          // Check if user has cert if no call the certgen script
+
 };
 
 //sign in route function
