@@ -1,9 +1,9 @@
 import React, {useMemo} from 'react';
-import { useTable } from 'react-table';
+import { useTable, useSortBy } from 'react-table';
 import MOCK_DATA from './MOCK_DATA.json';
 import {TABLE_COLUMNS} from './Columns';
 
-export default function CertsTable() {
+export default function SortingTable() {
 
     // Memoization caches the TABLE_COLUMNS array to improve performance
     // by preventing unnecessary re-renders, and the empty dependency array [] indicates no dependencies.
@@ -26,7 +26,8 @@ const {
     //remember EC6 shorthand syntax: objProp 'columns: columns' === columns
         columns,
         data
-    });
+    },
+    useSortBy);
     
     
 
@@ -40,10 +41,12 @@ const {
             <thead>
                 {headerGroups.map((headerGroup) => (
                     <tr {...headerGroup.getHeaderGroupProps()} className='text-left border-b border-gray-300'>
-                        {
-                            headerGroup.headers.map((column) => (
-                                <th {...column.getHeaderProps()} className='px-5 py-3 border-b-2 border-gray-300 bg-gray-100 text-gray-600 uppercase text-sm'>
+                        {headerGroup.headers.map((column) => (
+                                <th {...column.getHeaderProps(column.getSortByToggleProps())} className='px-5 py-3 border-b-2 border-gray-300 bg-gray-100 text-gray-600 uppercase text-sm'>
                                     {column.render('Header')}
+                                    <span>
+                                        
+                                    </span>
                                 </th>
                             ))
                         }
