@@ -7,6 +7,7 @@ import Profile from "./pages/Profile";
 import Header from "./components/Header";
 import PrivateRoute from "./components/PrivateRoute";
 import Certs from "./pages/Certs";
+import Certs2 from "./pages/Certs2";
 
 export default function App() {
   return (
@@ -21,7 +22,9 @@ export default function App() {
           <Route path="/profile" element={<Profile />} />
         </Route>
           <Route path="/certs" element={<Certs />} />
+          <Route path="/certs2" element={<Certs2 />} />
       </Routes>
+      
     </BrowserRouter>
   );
 }

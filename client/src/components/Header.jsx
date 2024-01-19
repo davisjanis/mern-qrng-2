@@ -25,6 +25,11 @@ export default function Header() {
           <li>Certs</li>
         </Link>
         )}
+         {currentUser && (
+        <Link to="/certs2">
+          <li>Certs2</li>
+        </Link>
+        )}
         <Link to="/profile">
           {currentUser ? (
             <img src={currentUser.profilePicture} alt='profile' className="h-7 w-7 rounded-full
