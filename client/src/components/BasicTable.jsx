@@ -1,4 +1,7 @@
-import {useReactTable, getCoreRowModel, flexRender} from '@tanstack/react-table'
+import {useReactTable, 
+        getCoreRowModel, 
+        flexRender, 
+        getPaginationRowModel} from '@tanstack/react-table'
 import mdata from '../components/MOCK_DATA_2.json'
 import { useMemo } from 'react'
 import {DateTime} from 'luxon'
@@ -8,9 +11,8 @@ export default function BasicTable() {
   
   const data = useMemo(() => mdata, [])
 
-    // @type {"id":2,"name":"Platalea leucordia","expires":"6/24/2024","status":"Overhold","actions":false},
-
   const columns = [
+    
     {
         header: 'ID',
         accessorKey: 'id',
@@ -21,6 +23,10 @@ export default function BasicTable() {
         accessorKey: 'name',
         footer: 'Name',
     },
+    //header grouping
+    // {
+    //     header: "ID", accessorFn: (row) =>`${row.id} ${row.name}`
+    // },
     {
         header: 'Expires',
         accessorKey: 'expires',
@@ -40,7 +46,12 @@ export default function BasicTable() {
 
   ]
 
-  const table = useReactTable({data, columns, getCoreRowModel: getCoreRowModel()})
+  const table = useReactTable({
+    data,
+    columns,
+    getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+})
    
   return (
     <div className='w3-container'>
@@ -67,7 +78,7 @@ export default function BasicTable() {
                 ))}
                
             </tbody>
-            <tfoot>
+            {/* <tfoot>
             {table.getFooterGroups().map(footerGroup => (
                 <tr key={footerGroup.id}>
                     {footerGroup.headers.map(header => <th key={header.id}>
@@ -75,8 +86,14 @@ export default function BasicTable() {
                     </th>)}
                 </tr>
             ))}
-            </tfoot>
+            </tfoot> */}
         </table>
+        <div>
+            <button>First Page</button>
+            <button>Previous Page</button>
+            <button>Next Page</button>
+            <button>Last Page</button>
+        </div>
     </div>
   )
 }
